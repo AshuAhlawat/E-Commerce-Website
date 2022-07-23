@@ -6,7 +6,7 @@ class Product(models.Model):
     desciption = models.CharField(max_length=1000,blank=True)
     category = models.CharField(default="unclassified",max_length=30)
 
-    image = models.ImageField(upload_to="images/products", default="default/product.jpeg")
+    image = models.ImageField(upload_to="images/products/", default="default/product.jpeg")
 
     price = models.PositiveIntegerField(default=100)
     discount = models.FloatField(default=0.0)

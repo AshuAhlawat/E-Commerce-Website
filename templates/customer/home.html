@@ -9,8 +9,14 @@
 <body>
     <h2>Customer Home</h2>
     {% for product in products %}
+        <p>
             {{product.name}} for {{product.price}}Rs
-            <img src="/media/{{product.image}}" alt="">
+            <img src="/media/{{product.image}}" alt="" height="200" width="200">
+            <form action="" method="get">
+                <input type="hidden" name="id" value="{{product.id}}">
+                <input type="number" name="amount">
+                <input type="submit" value="Add to Cart">
+            </form>
         </p>
     {% endfor %}
 </body>

@@ -1,9 +1,18 @@
 from django.shortcuts import render, redirect
 from .forms import ProductForm
+from supplier.models import Product
 
 # Create your views here.
 def home(request):
     return render(request, "supplier/home.html")
+
+def product(request,id):
+    product = Product.objects.get(id=id)
+
+    context = {
+        'product' : product
+    }
+    return render(request, "supplier/product.html", context)
 
 def add_product(request):
     if request.method == "GET":
@@ -13,8 +22,10 @@ def add_product(request):
             "product_form" : product_form
         }
     elif request.method == "POST":
-        form = ProductForm(request.POST)
+        form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
+            print(request.POST)
+            print(request.FILES)
             form.save()
         return redirect("/supplier/home")
 
