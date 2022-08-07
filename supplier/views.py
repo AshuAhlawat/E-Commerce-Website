@@ -6,13 +6,14 @@ from supplier.models import Product
 def home(request):
     return render(request, "supplier/home.html")
 
-def product(request,id):
+def product(request, id):
+    # print(id)
     product = Product.objects.get(id=id)
 
-    context = {
+    data ={
         'product' : product
     }
-    return render(request, "supplier/product.html", context)
+    return render(request, "supplier/product.html", data)
 
 def add_product(request):
     if request.method == "GET":
@@ -21,11 +22,11 @@ def add_product(request):
         context = {
             "product_form" : product_form
         }
+
     elif request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
+
         if form.is_valid():
-            print(request.POST)
-            print(request.FILES)
             form.save()
         return redirect("/supplier/home")
 

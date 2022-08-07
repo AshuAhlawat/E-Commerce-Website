@@ -8,16 +8,20 @@
 </head>
 <body>
     <h2>Customer Home</h2>
-    {% for product in products %}
+    {% for cat in cats %}
+        <h1>{{cat.0.category}}</h1>
+        {% for product in cat|slice:2 %}
         <p>
             {{product.name}} for {{product.price}}Rs
             <img src="/media/{{product.image}}" alt="" height="200" width="200">
-            <form action="" method="get">
+            <form action="" method="post">
+                {% csrf_token %}
                 <input type="hidden" name="id" value="{{product.id}}">
-                <input type="number" name="amount">
+                <input type="number" name="amount" value="1" required>
                 <input type="submit" value="Add to Cart">
             </form>
         </p>
+        {% endfor %}
     {% endfor %}
 </body>
 </html>
